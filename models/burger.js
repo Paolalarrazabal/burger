@@ -1,4 +1,6 @@
-let orm = require("../config/orm");
+//Burger.js
+
+let orm = require("../config/orm.js");
 
 let burger = {
     selectAll: function (callback) {
@@ -6,21 +8,21 @@ let burger = {
             callback(res);
         });
     },
-    insertOne: function (callback, burger_name) {
-        orm.insertOne("burgers", burger_name, function (res) {
+    insertOne: function (cols, vals, callback) {
+        orm.insertOne("burgers", cols, vals, function (res) {
             callback(res);
         });
     },
-    updateOne: function (callback, burgerID) {
-        orm.updateOne("burgers", burgerID, function (res) {
+    updateOne: function (objColVals, condition, callback) {
+        orm.updateOne("burgers", objColVals, condition, function (res) {
             callback(res);
         });
     },
-    deleteOne: function (callback, burgerID) {
-        orm.deleteOne("burgers", burgerID, function (res) {
+    deleteOne: function (condition, callback) {
+        orm.deleteOne("burgers", condition, function (res) {
             callback(res);
         });
     }
 }
 
-module.exports = burgers;
+module.exports = burger;

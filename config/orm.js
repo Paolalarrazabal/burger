@@ -1,35 +1,81 @@
-const connection = require("../config/connection"); 
+//orm.js
+
+const connection = require("../config/connection.js");
+
+
+// helper function 
+
+function printQuestionMarks(num) {
+    var arr = [];
+    
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
+    
+    return arr.toString();
+    }
+
+function objToSql(ob) {
+    var arr = [];
+
+    for (var key in ob) {
+        var value = ob[key];
+
+        if (Object.hasOwnProperty.call(ob, key)) {
+
+            if (typeof value === "string" && value.indexOf(" ") >= 0) {
+                value = "'" + value + "'";
+            }
+
+            arr.push(key + "=" + value);
+        }
+    }
+
+
+    return arr.toString();
+};
 
 let orm = {
-    selectAll: function (callback) {
-        connection.query("SELECT * FROM `burgers`", function(err, res) {
-            if (err) throw err;
+
+    selectAll: function (tableName, callback) {
+        let dbQuery = "SELECT * FROM " + tableName + ";"; 
+        connection.query(dbQuery, function(err, res) {
+            if (err) {
+                throw err;
+            }
             callback(res); 
         });
     }, 
 
-    insertOne: function (callback, burger_name) {
-        connection.query("INSERT INTO `burgers` SET ?", {
-            burger_name: burger_name,
-            devoured: false
-        }, function(err, res) {
-            if (err) throw err;
+    insertOne: function (tableName, cols, vals, callback) {
+        let dbQuery = "INSERT INTO " + tableName + "(" + cols.toString() + ")" + "VALUES (" + printQuestionMarks(vals.length) + ")"; 
+        console.log(dbQuery); 
+        connection.query(dbQuery, vals, function(err, res) {
+            if (err) {
+                throw err;
+            }
             callback(res);
         });
     },
 
-    updateOne: function(callback, burgerID) {
-        connection.query("UPDATE `burgers` SET `devoured` = ? WHERE `id` = ?", [true, burgerID], 
-        function(err, res) {
-            if (err) throw err;
+    updateOne: function(tableName, objColsVals, condition, callback) {
+        let dbQuery = "UPDATE " + tableName + "SET " + translateSql(objColsVals) + "WHERE " + condition; 
+        console.log(dbQuery);
+        connection.query(dbQuery, function(err, res) {
+            if (err) {
+                throw err;
+            }
             callback(res);  
         });
     },
 
-    deleteOne: function (callback, burgerID) {
-        connection.query("DELETE FROM `burgers` WHERE `id` = ?", [burgerID], 
-        function(err, res) {
-            if (err) throw err;
+    deleteOne: function (tableName, condition, cb) {
+        let dbQuery = "DELETE FROM " + tableName + "WHERE " + condition;
+        console(dbQuery); 
+        connection.query(dbQuery, function(err, res) {
+            if (err) {
+                throw err;
+            } 
             callback(res);   
         });
     }
@@ -37,6 +83,11 @@ let orm = {
 };
 
 module.exports = orm;
+
+
+
+
+
 
 
 
