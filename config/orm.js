@@ -15,7 +15,7 @@ function printQuestionMarks(num) {
     return arr.toString();
     }
 
-function objToSql(ob) {
+function translateSql(ob) {
     var arr = [];
 
     for (var key in ob) {
