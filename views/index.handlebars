@@ -15,9 +15,9 @@
     <ul>
         {{#each burgers}}
         {{#unless devoured}}
-        <span>{{this.id}} - {{this.burger_name}} </span>
+        <span>- {{this.burger_name}} </span>
         
-        <button type="button" class="btn btn-success" class=".devouredBurger">devour it </button>
+        <button type="button" class="devouredBurger btn btn-success"  data-id="{{this.id}}">devour it </button>
         
         {{/unless}}
         {{/each}}
@@ -34,15 +34,18 @@
             </div>
         </form>
     </div>
+
+
     <div class="col">
     <!-- devoured burgers section -->   
-
-    {{#each burger_name}} 
+<ul>
+    {{#each burgers}} 
     {{#if devoured}}
-    <span>{{this.id}} - {{this.burger_name}} </span>
+    <span> - {{this.burger_name}} </span>
+    <button type="button" class="deleteBurger btn btn-success"  data-id="{{this.id}}">Throw Away </button>
     {{/if}}
     {{/each}}
-    
+    </ul>
     </div>
 </div>
 </div>

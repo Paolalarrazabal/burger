@@ -43,7 +43,7 @@
 
                 let id = $(this).data("id"); 
                 let burgerStatus = {
-                    devoured: 1 
+                    devoured: 1
                 }
                 $.ajax("/api/burgers/" + id, {
                     type: "PUT", 
@@ -52,6 +52,17 @@
                     console.log("burger devoured"); 
                     location.reload(); 
                 });
+            });
+
+            $(".deleteBurger").on("click", function(event) {
+                event.preventDefault(); 
+
+                let id = $(this).data("id"); 
+              
+                $.ajax({
+                    type: "DELETE", 
+                    url: "/api/burgers/" + id
+                }).then(location.reload());
             });
 
     

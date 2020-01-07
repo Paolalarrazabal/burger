@@ -59,7 +59,7 @@ let orm = {
     },
 
     updateOne: function(tableName, objColsVals, condition, callback) {
-        let dbQuery = "UPDATE " + tableName + "SET " + translateSql(objColsVals) + "WHERE " + condition; 
+        let dbQuery = "UPDATE " + tableName + " SET " + translateSql(objColsVals) + " WHERE " + condition; 
         console.log(dbQuery);
         connection.query(dbQuery, function(err, res) {
             if (err) {
@@ -69,9 +69,9 @@ let orm = {
         });
     },
 
-    deleteOne: function (tableName, condition, cb) {
-        let dbQuery = "DELETE FROM " + tableName + "WHERE " + condition;
-        console(dbQuery); 
+    deleteOne: function (tableName, condition, callback) {
+        let dbQuery = "DELETE FROM " + tableName + " WHERE " + condition;
+        console.log(dbQuery); 
         connection.query(dbQuery, function(err, res) {
             if (err) {
                 throw err;
