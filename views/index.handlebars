@@ -1,51 +1,87 @@
-<div class="container">
-    <div class="row">
-        <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Burger Yum!</h1>
-            <p class="lead"> Specify the burger you desire and devour.</p>
+
+
+
+<div class="container-fluid">
+    <div class="row" id="title-row">
+        <div class="col text-center" id="title-content">
+
+
+            <h1>
+                <img src="https://img.icons8.com/ios-filled/70/000000/kangaroo.png">
+                BURGEROOO
+                <img src="https://img.icons8.com/ios-filled/70/000000/kangaroo.png">
+            </h1>
+            <div id="rightleaf"></div>
+            <p class="lead"> Just order the burger you want, eat it and trash it</p>
+
         </div>
+    </div>
+    <div class="row align-items-center" id="main-content">
+
+        <!-- burgers section -->
+
+        <div class="col" id="burger-devour">
+            <h3>Burgers added </h3>
+
+            <ul class="fa-ul">
+                {{#each burgers}}
+                {{#unless devoured}}
+
+                
+
+                <li><span class="fa-li"><i class="fas fa-hamburger"></i></span>
+                    {{this.burger_name}}
+                <i type="button" class="fas fa-utensils devouredBurger" data-id="{{this.id}}"></i> 
+                       
+                </li>
+
+
+
+                {{/unless}}
+                {{/each}}
+            </ul>
+
+
+        </div>
+
+        <!-- Text input section -->
+
+        <div class="col text-center" id="burger-input">
+
+            <iframe src="https://giphy.com/embed/l0K4lPx8bvdbFMdGM" width="440" height="300" frameBorder="0"
+                class="giphy-embed" allowFullScreen></iframe>
+            <br></br>
+
+            <form class="burger-form">
+                <div class="form-group">
+
+                    <input class="form-control" type="text" placeholder="" id="addedBurger">
+                    <button type="submit" class="btn btn-success">Add Burger</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- devoured burgers section -->
+
+        <div class="col" id="burger-delete">
+<h3>Burgers devoured</h3>
+            <ul class="fa-ul">
+                {{#each burgers}}
+                {{#if devoured}}
+
+                <li>
+                    <span class="fa-li"><i class="fas fa-hamburger"></i></span>
+                    {{this.burger_name}}
+                    <i type="button" class="fas fa-trash deleteBurger" data-id="{{this.id}}"></i>
+                </li>
+
+                <!-- <button type="button" class="deleteBurger btn btn-success"  data-id="{{this.id}}">Throw Away </button> -->
+
+                {{/if}}
+                {{/each}}
+            </ul>
         </div>
     </div>
-<div class="row">
-    <div class="col" id="leftside">
 
-    <!-- burgers section -->
-
-    <ul>
-        {{#each burgers}}
-        {{#unless devoured}}
-        <span>- {{this.burger_name}} </span>
-        
-        <button type="button" class="devouredBurger btn btn-success"  data-id="{{this.id}}">devour it </button>
-        
-        {{/unless}}
-        {{/each}}
-    </ul>
-
-
-    </div>
-    <div class="col">
-    <!-- Text input section -->
-    <form class="burger-form">
-        <div class="form-group">
-        <input class="form-control form-control-lg" type="text" placeholder="" id="addedBurger">
-                <button type="submit" class="btn btn-success">Add Burger</button>
-            </div>
-        </form>
-    </div>
-
-
-    <div class="col">
-    <!-- devoured burgers section -->   
-<ul>
-    {{#each burgers}} 
-    {{#if devoured}}
-    <span> - {{this.burger_name}} </span>
-    <button type="button" class="deleteBurger btn btn-success"  data-id="{{this.id}}">Throw Away </button>
-    {{/if}}
-    {{/each}}
-    </ul>
-    </div>
-</div>
+   
 </div>
