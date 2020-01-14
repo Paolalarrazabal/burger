@@ -1,6 +1,3 @@
-
-
-
 <div class="container-fluid">
     <div class="row" id="title-row">
         <div class="col text-center" id="title-content">
@@ -12,7 +9,7 @@
                 <img src="https://img.icons8.com/ios-filled/70/000000/kangaroo.png">
             </h1>
             <div id="rightleaf"></div>
-            <p class="lead"> Just order the burger you want, eat it and trash it</p>
+            <p class="lead"> Welcome to Burgeroo, just order the burger you want, eat it and trash it</p>
 
         </div>
     </div>
@@ -27,12 +24,12 @@
                 {{#each burgers}}
                 {{#unless devoured}}
 
-                
+
 
                 <li><span class="fa-li"><i class="fas fa-hamburger"></i></span>
                     {{this.burger_name}}
-                <i type="button" class="fas fa-utensils devouredBurger" data-id="{{this.id}}"></i> 
-                       
+                    <i type="button" class="fas fa-utensils devouredBurger" data-id="{{this.id}}"></i>
+
                 </li>
 
 
@@ -65,7 +62,7 @@
         <!-- devoured burgers section -->
 
         <div class="col" id="burger-delete">
-<h3>Burgers devoured</h3>
+            <h3>Burgers devoured</h3>
             <ul class="fa-ul">
                 {{#each burgers}}
                 {{#if devoured}}
@@ -84,6 +81,6 @@
         </div>
     </div>
 
- 
-   
+
+
 </div>
